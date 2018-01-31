@@ -1,5 +1,5 @@
 =====
-Polls
+django-tawkto
 =====
 
 django-tawkto is a simple Django app to it integrates with https://www.tawk.to/ chat.
