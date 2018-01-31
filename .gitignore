@@ -2,3 +2,7 @@
 
 *.db
 *.sqlite3
+__pycache__
+
+django_tawkto.egg-info
+dist/

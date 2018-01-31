@@ -1,0 +1,8 @@
+include LICENSE
+include README.rst
+recursive-include tawkto/templates *
+recursive-include test_project *
+
+# exclude all bytecode
+global-exclude *.pyo
+global-exclude *.pyc
