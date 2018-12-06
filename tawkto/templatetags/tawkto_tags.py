@@ -15,13 +15,15 @@ def tawkto_script(**kwargs):
 
     user_email = kwargs.pop('user_email', '')
     user_name = kwargs.pop('user_name', '')
-
+    widget_id = kwargs.pop('widget_id', 'default')
+    
     data = {
         'id_site': id_site,
         'api_key': api_key,
         'is_secure': is_secure,
         'user_email': user_email,
-        'user_name': user_name
+        'user_name': user_name,
+        'widget_id': widget_id
     }
 
     if is_secure and user_email:
