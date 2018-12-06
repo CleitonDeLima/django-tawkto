@@ -48,3 +48,6 @@ Quick start
 6. Add visitor `name` and `email`::
 
     {% tawkto_script user_name=request.user.get_full_name user_email=request.user.email %}
+
+7. Use a different widget for a given property::
+     {% tawkto_script widget_id='somewidgetid' %}
