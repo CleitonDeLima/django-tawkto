@@ -6,3 +6,5 @@ __pycache__
 
 django_tawkto.egg-info
 dist/
+
+build/
