@@ -9,13 +9,15 @@ register = template.Library()
 
 @register.inclusion_tag('tawkto/templatetags/tawkto_script.html')
 def tawkto_script(**kwargs):
-    id_site = getattr(settings, 'TAWKTO_ID_SITE')
-    api_key = getattr(settings, 'TAWKTO_API_KEY', None)
+    default_id_site = getattr(settings, 'TAWKTO_ID_SITE')
+    default_api_key = getattr(settings, 'TAWKTO_API_KEY', None)
     is_secure = getattr(settings, 'TAWKTO_IS_SECURE', False)
 
     user_email = kwargs.pop('user_email', '')
     user_name = kwargs.pop('user_name', '')
     widget_id = kwargs.pop('widget_id', 'default')
+    id_site = kwargs.pop('id_site', default_id_site)
+    api_key = kwargs.pop('api_key', default_api_key)
     
     data = {
         'id_site': id_site,
