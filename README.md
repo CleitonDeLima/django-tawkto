@@ -5,6 +5,7 @@ django-tawkto is a simple Django app to it integrates with https://www.tawk.to/ 
 ### Quick start
 
 Install the stable release from pypi (using pip):
+
 ```bash
 pip install django-tawkto
 ```
@@ -57,7 +58,7 @@ In HTML:
 
 ```djangotemplate
 {% tawkto_script user_name=request.user.get_full_name user_email=request.user.email %}
-```    
+```
 
 7. Use a different widget for a given property:
 
@@ -65,3 +66,8 @@ In HTML:
 {% tawkto_script widget_id='somewidgetid' %}
 ```
 
+8. Use a different tawkto property:
+
+```djangotemplate
+{% tawkto_script id_site='tawktosideit' api_key='tawktoapikey'%}
+```
