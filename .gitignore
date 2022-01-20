@@ -9,3 +9,5 @@ django_tawkto.egg-info
 dist/
 
 build/
+
+.venv/
