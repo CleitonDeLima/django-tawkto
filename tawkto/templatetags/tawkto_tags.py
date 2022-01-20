@@ -11,13 +11,14 @@ register = template.Library()
 def tawkto_script(**kwargs):
     default_id_site = getattr(settings, "TAWKTO_ID_SITE")
     default_api_key = getattr(settings, "TAWKTO_API_KEY", None)
+    default_widget_id = getattr(settings, "TAWKTO_WIDGET_ID", "default")
     is_secure = getattr(settings, "TAWKTO_IS_SECURE", False)
 
-    user_email = kwargs.pop("user_email", "")
-    user_name = kwargs.pop("user_name", "")
-    widget_id = kwargs.pop("widget_id", "default")
-    id_site = kwargs.pop("id_site", default_id_site)
-    api_key = kwargs.pop("api_key", default_api_key)
+    user_email = kwargs.get("user_email", "")
+    user_name = kwargs.get("user_name", "")
+    widget_id = kwargs.get("widget_id", default_widget_id)
+    id_site = kwargs.get("id_site", default_id_site)
+    api_key = kwargs.get("api_key", default_api_key)
 
     data = {
         "id_site": id_site,
@@ -30,7 +31,9 @@ def tawkto_script(**kwargs):
 
     if is_secure and user_email:
         hash_hmac = hmac.new(
-            key=api_key.encode(), msg=user_email.encode(), digestmod=hashlib.sha256
+            key=api_key.encode(),
+            msg=user_email.encode(),
+            digestmod=hashlib.sha256,
         ).hexdigest()
 
         data.update(hash=hash_hmac)

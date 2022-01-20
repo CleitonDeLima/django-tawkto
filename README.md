@@ -60,7 +60,13 @@ In HTML:
 {% tawkto_script user_name=request.user.get_full_name user_email=request.user.email %}
 ```
 
-7. Use a different widget for a given property:
+7. Use a different widget for a given property (`default` is the default value):
+
+```python
+TAWKTO_WIDGET_ID = "default"
+```
+
+or
 
 ```djangotemplate
 {% tawkto_script widget_id='somewidgetid' %}
