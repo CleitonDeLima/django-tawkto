@@ -121,7 +121,10 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
+# Changed in Django 3.1:
+# In older versions, the default value is None.
+SECURE_REFERRER_POLICY = None
 
-TAWKTO_ID_SITE = "<id-site>"
-TAWKTO_API_KEY = "<api-key>"
-TAWKTO_IS_SECURE = True
+TAWKTO_ID_SITE = os.environ.get("TAWKTO_ID_SITE", "")
+TAWKTO_API_KEY = os.environ.get("TAWKTO_API_KEY", "")
+TAWKTO_IS_SECURE = False
