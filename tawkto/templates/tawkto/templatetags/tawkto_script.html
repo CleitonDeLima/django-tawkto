@@ -1,8 +1,8 @@
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
-  var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+  window.Tawk_API = window.Tawk_API || {}, window.Tawk_LoadStart = new Date();
   {% if user_name or user_email  %}
-    Tawk_API.visitor = {
+    window.Tawk_API.visitor = {
     {% if user_name %}name  : "{{ user_name }}"{% endif %}
     {% if user_email %},email : "{{ user_email }}"{% endif %}
     {% if is_secure %},hash: "{{ hash }}"{% endif %}
