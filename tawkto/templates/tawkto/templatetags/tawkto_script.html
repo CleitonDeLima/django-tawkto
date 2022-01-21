@@ -1,20 +1,31 @@
 <!--Start of Tawk.to Script-->
+{{ tawkto_data|json_script:"tawkto_data" }}
 <script type="text/javascript">
-  window.Tawk_API = window.Tawk_API || {}, window.Tawk_LoadStart = new Date();
-  {% if user_name or user_email  %}
-    window.Tawk_API.visitor = {
-    {% if user_name %}name  : "{{ user_name }}"{% endif %}
-    {% if user_email %},email : "{{ user_email }}"{% endif %}
-    {% if is_secure %},hash: "{{ hash }}"{% endif %}
+  const TawkData = JSON.parse(document.getElementById("tawkto_data").innerText);
+  window.Tawk_API = window.Tawk_API || {};
+  window.Tawk_LoadStart = new Date();
+
+  if (TawkData.visitor.name || TawkData.visitor.email) {
+    window.Tawk_API.visitor = TawkData.visitor;
+  }
+
+  if (TawkData.is_secure && TawkData.visitor.email && TawkData.extra_attributes) {
+    window.Tawk_API.onLoad = function(){
+      window.Tawk_API.setAttributes(TawkData.extra_attributes, function(error){
+        if (error) {
+          console.log("setAttributes API error", error);
+        }
+      });
     };
-  {% endif %}
+  }
 
   (function () {
-    var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+    var s1 = document.createElement("script");
+    var s0 = document.getElementsByTagName("script")[0];
     s1.async = true;
-    s1.src = 'https://embed.tawk.to/{{ id_site }}/{{ widget_id }}';
-    s1.charset = 'UTF-8';
-    s1.setAttribute('crossorigin', '*');
+    s1.src = TawkData.url;
+    s1.charset = "UTF-8";
+    s1.setAttribute("crossorigin", "*");
     s0.parentNode.insertBefore(s1, s0);
   })();
 </script>

@@ -128,4 +128,4 @@ SECURE_REFERRER_POLICY = None
 TAWKTO_ID_SITE = os.environ.get("TAWKTO_ID_SITE", "")
 TAWKTO_API_KEY = os.environ.get("TAWKTO_API_KEY", "")
 TAWKTO_WIDGET_ID = os.environ.get("TAWKTO_WIDGET_ID", "")
-TAWKTO_IS_SECURE = False
+TAWKTO_IS_SECURE = True
