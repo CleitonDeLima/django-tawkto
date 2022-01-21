@@ -12,21 +12,27 @@ def tawkto_script(**kwargs):
     default_id_site = getattr(settings, "TAWKTO_ID_SITE")
     default_api_key = getattr(settings, "TAWKTO_API_KEY", None)
     default_widget_id = getattr(settings, "TAWKTO_WIDGET_ID", "default")
-    is_secure = getattr(settings, "TAWKTO_IS_SECURE", False)
+    default_is_secure = getattr(settings, "TAWKTO_IS_SECURE", False)
 
     user_email = kwargs.get("user_email", "")
     user_name = kwargs.get("user_name", "")
+    is_secure = kwargs.get("is_secure", default_is_secure)
     widget_id = kwargs.get("widget_id", default_widget_id)
     id_site = kwargs.get("id_site", default_id_site)
     api_key = kwargs.get("api_key", default_api_key)
+    extra_attributes = kwargs.get("extra_attributes", {})
 
     data = {
         "id_site": id_site,
         "api_key": api_key,
         "is_secure": is_secure,
-        "user_email": user_email,
-        "user_name": user_name,
         "widget_id": widget_id,
+        "url": f"https://embed.tawk.to/{id_site}/{widget_id}",
+        "visitor": {
+            "name": user_name,
+            "email": user_email,
+        },
+        "extra_attributes": extra_attributes,
     }
 
     if is_secure and user_email:
@@ -35,7 +41,6 @@ def tawkto_script(**kwargs):
             msg=user_email.encode(),
             digestmod=hashlib.sha256,
         ).hexdigest()
+        data["visitor"]["hash"] = hash_hmac
 
-        data.update(hash=hash_hmac)
-
-    return data
+    return {"tawkto_data": data}
