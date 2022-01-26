@@ -13,6 +13,7 @@ def tawkto_script(**kwargs):
     default_api_key = getattr(settings, "TAWKTO_API_KEY", None)
     default_widget_id = getattr(settings, "TAWKTO_WIDGET_ID", "default")
     default_is_secure = getattr(settings, "TAWKTO_IS_SECURE", False)
+    exclude_superusers = getattr(settings, "TAWKTO_EXCLUDE_SUPERUSERS", True)
 
     user_email = kwargs.get("user_email", "")
     user_name = kwargs.get("user_name", "")
@@ -43,4 +44,7 @@ def tawkto_script(**kwargs):
         ).hexdigest()
         data["visitor"]["hash"] = hash_hmac
 
-    return {"tawkto_data": data}
+    return {
+        "tawkto_data": data,
+        "exclude_superusers": exclude_superusers,
+    }

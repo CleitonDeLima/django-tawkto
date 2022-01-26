@@ -84,6 +84,13 @@ or
 {% tawkto_script id_site='tawktosideit' api_key='tawktoapikey'%}
 ```
 
+(Optional) If you want to hide the chat for superuser (default is `True`):
+
+```python
+TAWKTO_EXCLUDE_SUPERUSERS = True
+```
+
+
 (Optional) Set custom metadata regarding this chat/visitor:
 
 - `is_secure` must be `True`.
