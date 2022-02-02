@@ -7,13 +7,17 @@ from django.conf import settings
 register = template.Library()
 
 
-@register.inclusion_tag("tawkto/templatetags/tawkto_script.html")
-def tawkto_script(**kwargs):
+@register.inclusion_tag("tawkto/templatetags/tawkto_script.html", takes_context=True)
+def tawkto_script(context, **kwargs):
+    request = context["request"]
     default_id_site = getattr(settings, "TAWKTO_ID_SITE")
     default_api_key = getattr(settings, "TAWKTO_API_KEY", None)
     default_widget_id = getattr(settings, "TAWKTO_WIDGET_ID", "default")
     default_is_secure = getattr(settings, "TAWKTO_IS_SECURE", False)
-    exclude_superusers = getattr(settings, "TAWKTO_EXCLUDE_SUPERUSERS", True)
+    exclude_superusers = (
+        getattr(settings, "TAWKTO_EXCLUDE_SUPERUSERS", True)
+        and request.user.is_superuser
+    )
 
     user_email = kwargs.get("user_email", "")
     user_name = kwargs.get("user_name", "")
